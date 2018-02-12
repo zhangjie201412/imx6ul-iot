@@ -1,0 +1,13 @@
+Import('env')
+svcmgr_files = Split(
+        """binder.c
+	       service_manager.c"""
+        )
+svcmgr_cflags = Split(
+        """-DHAVE_PTHREADS
+           -DHAVE_SYS_UIO_H
+           -DHAVE_ENDIAN_H
+           -DHAVE_ANDROID_OS=1"""
+        )
+env.Append(CPPPATH=['.', '../core/include/'])
+env.Program('../bin/svrmgr', svcmgr_files,  CCFLAGS=svcmgr_cflags, CXXFLAGS='-std=c++11')

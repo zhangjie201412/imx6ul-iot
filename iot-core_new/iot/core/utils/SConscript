@@ -35,4 +35,4 @@ utils_cflags = Split(
 # toolkit.h is located in this directory, add it to the include path
 env.Append(CPPPATH=['.', '../include/'])
 # Let's declare a library named toolkit, using toolkit.c as its only source
-env.SharedLibrary('../libs/utils', utils_files,  CCFLAGS=utils_cflags, CXXFLAGS='-std=c++11')
+env.SharedLibrary('../../libs/utils', utils_files,  CCFLAGS=utils_cflags, CXXFLAGS='-std=c++11')
