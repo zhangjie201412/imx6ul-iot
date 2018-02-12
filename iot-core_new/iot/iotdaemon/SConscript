@@ -1,0 +1,24 @@
+Import('env')
+daemon_files = Split(
+        """BnIotDaemon.cpp
+	       BpIotDaemon.cpp
+           IotDaemonProxy.cpp
+           iotdaemon.cpp"""
+        )
+
+
+client_files = Split(
+        """BpIotDaemon.cpp
+           client.cpp"""
+        )
+
+daemon_cflags = Split(
+        """-DHAVE_PTHREADS
+           -DHAVE_SYS_UIO_H
+           -DHAVE_ENDIAN_H
+           -DHAVE_ANDROID_OS=1"""
+        )
+env.Append(CPPPATH=['.', '../core/include/'])
+#env.Program('../bin/iotdaemon', daemon_files,  CCFLAGS=daemon_cflags, CXXFLAGS='-std=c++11', LIBS=['utils', 'binder', 'pthread', 'cutils'], LIBPATH='../libs/')
+
+env.Program('../bin/iotclient', client_files,  CCFLAGS=daemon_cflags, CXXFLAGS='-std=c++11', LIBS=['utils', 'binder', 'pthread', 'cutils'], LIBPATH='../libs/')

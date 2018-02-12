@@ -23,13 +23,12 @@ release_env.Append(CPPDEFINES=['RELEASE'])
 release_env.VariantDir('build/release', 'iot')
 
 # We define our debug build environment in a similar fashion...
-debug_env = common_env.Clone()
-debug_env.Append(CPPDEFINES=['DEBUG'])
-debug_env.VariantDir('build/debug', 'iot')
+#debug_env = common_env.Clone()
+#debug_env.Append(CPPDEFINES=['DEBUG'])
+#debug_env.VariantDir('build/debug', 'iot')
 
 # Now that all build environment have been defined, let's iterate over
 # them and invoke the lower level SConscript files.
-for mode, env in dict(release=release_env, 
-    	       	      debug=debug_env).iteritems():
+for mode, env in dict(release=release_env).iteritems():
     env.SConscript('build/%s/SConscript' % mode, {'env': env})
 
