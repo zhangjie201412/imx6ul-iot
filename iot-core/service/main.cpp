@@ -3,9 +3,7 @@
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
 #include <binder/PermissionCache.h>
-
 #include <binder/ProcessState.h>
-
 #include <binder/IInterface.h>
 #include <utils/String16.h>
 
