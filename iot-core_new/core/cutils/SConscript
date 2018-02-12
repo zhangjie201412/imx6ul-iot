@@ -1,0 +1,28 @@
+Import('env')
+cutils_files = Split(
+        """ashmem-dev.c
+	       atomic.c
+	       native_handle.c
+	       process_name.c
+	       properties.c
+	       safe_iop.c
+	       sched_policy.c
+	       socket_inaddr_any_server.c
+	       socket_local_client.c
+	       socket_local_server.c
+	       socket_loopback_client.c
+	       socket_loopback_server.c
+	       sockets.c
+	       strlcpy.c
+	       threads.c"""
+        )
+cutils_cflags = Split(
+        """-DHAVE_PTHREADS
+           -DHAVE_SYS_UIO_H
+           -DHAVE_ENDIAN_H
+           -DHAVE_ANDROID_OS=1"""
+        )
+# toolkit.h is located in this directory, add it to the include path
+env.Append(CPPPATH=['.', '../include/'])
+# Let's declare a library named toolkit, using toolkit.c as its only source
+env.SharedLibrary('../libs/cutils', cutils_files,  CCFLAGS=cutils_cflags, CXXFLAGS='-std=c++11')

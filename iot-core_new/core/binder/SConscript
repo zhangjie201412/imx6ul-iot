@@ -1,0 +1,35 @@
+Import('env')
+binder_files = Split(
+        """AppOpsManager.cpp
+	       Binder.cpp
+	       BpBinder.cpp
+	       BufferedTextOutput.cpp
+	       Debug.cpp
+	       IAppOpsCallback.cpp
+	       IAppOpsService.cpp
+	       IBatteryStats.cpp
+	       IInterface.cpp
+	       IMemory.cpp
+	       IPCThreadState.cpp
+	       IPermissionController.cpp
+	       IServiceManager.cpp
+	       MemoryBase.cpp
+	       MemoryDealer.cpp
+	       MemoryHeapBase.cpp
+	       Parcel.cpp
+	       PermissionCache.cpp
+	       ProcessInfoService.cpp
+	       ProcessState.cpp
+	       Static.cpp
+	       TextOutput.cpp"""
+        )
+binder_cflags = Split(
+        """-DHAVE_PTHREADS
+           -DHAVE_SYS_UIO_H
+           -DHAVE_ENDIAN_H
+           -DHAVE_ANDROID_OS=1"""
+        )
+# toolkit.h is located in this directory, add it to the include path
+env.Append(CPPPATH=['.', '../include/'])
+# Let's declare a library named toolkit, using toolkit.c as its only source
+env.SharedLibrary('../libs/binder', binder_files,  CCFLAGS=binder_cflags, CXXFLAGS='-std=c++11')
