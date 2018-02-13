@@ -112,6 +112,11 @@ int32_t property_get_int32(const char *key, int32_t default_value) {
 //     return __system_property_set(key, value);
 // }
 
+int property_get(const char *key, char *value, const char *default_value)
+{
+    return -1;
+}
+
 // int property_get(const char *key, char *value, const char *default_value)
 // {
 //     int len;

@@ -1,0 +1,10 @@
+Import('env')
+libhardware_files = Split(
+        """hardware.c
+        """
+        )
+env.Append(CPPPATH=['include/'])
+env.SharedLibrary('../libs/hardware', libhardware_files, CXXFLAGS='-std=c++11')
+
+env.SConscript('modules/SConscript', {'env': env})
+env.SConscript('tests/SConscript', {'env': env})

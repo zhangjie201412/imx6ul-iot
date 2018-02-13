@@ -33,6 +33,7 @@ typedef enum android_LogPriority {
 // #define android_printLog(prio, tag, x...) \
 //     __android_log_print(prio, tag, x)
 
+#if 1
 #define android_printLog(prio, tag, x...) ((void)0)
 
 #ifndef LOG_NDEBUG
@@ -147,5 +148,14 @@ typedef enum android_LogPriority {
 #endif
 
 #define android_errorWriteWithInfoLog(tag, subTag, uid, data, dataLen) ((void)0)
+#endif
+
+#undef ALOGE
+#undef ALOGD
+#undef ALOGI
+
+#define ALOGD       printf
+#define ALOGE       printf
+#define ALOGI       printf
 
 #endif

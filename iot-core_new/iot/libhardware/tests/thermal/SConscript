@@ -1,0 +1,8 @@
+Import('env')
+thermal_files = Split(
+        """thermal.cpp
+        """
+        )
+
+env.Append(CPPPATH=['.', '../../include/'])
+env.Program('../../../bin/thermal', thermal_files, CXXFLAGS='-std=c++11', LIBS=['hardware', 'utils', 'pthread', 'dl', 'cutils'], LIBPATH='../../../libs/')

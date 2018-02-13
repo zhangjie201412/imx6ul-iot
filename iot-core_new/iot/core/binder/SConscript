@@ -7,7 +7,6 @@ binder_files = Split(
 	       Debug.cpp
 	       IAppOpsCallback.cpp
 	       IAppOpsService.cpp
-	       IBatteryStats.cpp
 	       IInterface.cpp
 	       IMemory.cpp
 	       IPCThreadState.cpp
@@ -18,7 +17,6 @@ binder_files = Split(
 	       MemoryHeapBase.cpp
 	       Parcel.cpp
 	       PermissionCache.cpp
-	       ProcessInfoService.cpp
 	       ProcessState.cpp
 	       Static.cpp
 	       TextOutput.cpp"""
