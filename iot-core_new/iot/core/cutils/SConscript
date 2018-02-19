@@ -14,7 +14,8 @@ cutils_files = Split(
 	       socket_loopback_server.c
 	       sockets.c
 	       strlcpy.c
-	       threads.c"""
+	       threads.c
+           bugger.c"""
         )
 cutils_cflags = Split(
         """-DHAVE_PTHREADS
