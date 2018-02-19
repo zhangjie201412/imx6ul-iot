@@ -154,8 +154,25 @@ typedef enum android_LogPriority {
 #undef ALOGD
 #undef ALOGI
 
-#define ALOGD       printf
-#define ALOGE       printf
-#define ALOGI       printf
+#define ALOGD(fmt, ...)                     \
+        do {                                \
+            printf("D/%s: " fmt "\n",       \
+                    LOG_TAG,                \
+                    ##__VA_ARGS__);         \
+        } while(0)                          
+
+#define ALOGE(fmt, ...)                     \
+        do {                                \
+            printf("E/%s: " fmt "\n",       \
+                    LOG_TAG,                \
+                    ##__VA_ARGS__);         \
+        } while(0)                          
+
+#define ALOGI(fmt, ...)                     \
+        do {                                \
+            printf("I/%s: " fmt "\n",       \
+                    LOG_TAG,                \
+                    ##__VA_ARGS__);         \
+        } while(0)                          
 
 #endif

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+#define LOG_TAG             "HAL"
 #include <hardware/hardware.h>
 
 #include <cutils/properties.h>
@@ -25,7 +25,6 @@
 #include <limits.h>
 #include <unistd.h>
 
-#define LOG_TAG "HAL"
 #include <utils/Log.h>
 
 /** Base path of the hal modules */
@@ -132,22 +131,22 @@ static int load(const char *id,
 static int hw_module_exists(char *path, size_t path_len, const char *name,
                             const char *subname)
 {
-    ALOGD("%s: name: %s\n", __func__, name);
+    ALOGD("%s: name: %s", __func__, name);
     snprintf(path, path_len, "%s/%s.%s.so",
              HAL_LIBRARY_PATH3, name, subname);
-    ALOGD("%s: path1: %s\n", __func__, path);
+    ALOGD("%s: path1: %s", __func__, path);
     if (access(path, R_OK) == 0)
         return 0;
 
     snprintf(path, path_len, "%s/%s.%s.so",
              HAL_LIBRARY_PATH2, name, subname);
-    ALOGD("%s: path2: %s\n", __func__, path);
+    ALOGD("%s: path2: %s", __func__, path);
     if (access(path, R_OK) == 0)
         return 0;
 
     snprintf(path, path_len, "%s/%s.%s.so",
              HAL_LIBRARY_PATH1, name, subname);
-    ALOGD("%s: path3: %s\n", __func__, path);
+    ALOGD("%s: path3: %s", __func__, path);
     if (access(path, R_OK) == 0)
         return 0;
 
@@ -163,14 +162,12 @@ int hw_get_module_by_class(const char *class_id, const char *inst,
     char name[PATH_MAX] = {0};
     char prop_name[PATH_MAX] = {0};
 
-    ALOGD("%s: E\n", __func__);
-
     if (inst)
         snprintf(name, PATH_MAX, "%s.%s", class_id, inst);
     else
         strlcpy(name, class_id, PATH_MAX);
 
-    ALOGD("%s: class_id = %s, name = %s\n", __func__, class_id, name);
+    ALOGD("%s: class_id = %s, name = %s", __func__, class_id, name);
     /*
      * Here we rely on the fact that calling dlopen multiple times on
      * the same .so will simply increment a refcount (and not load
@@ -180,14 +177,12 @@ int hw_get_module_by_class(const char *class_id, const char *inst,
 
     /* First try a property specific to the class and possibly instance */
     snprintf(prop_name, sizeof(prop_name), "ro.hardware.%s", name);
-    ALOGD("%s: prop_name = %s\n", __func__, prop_name);
+    ALOGD("%s: prop_name = %s", __func__, prop_name);
     if (property_get(prop_name, prop, NULL) > 0) {
         if (hw_module_exists(path, sizeof(path), name, prop) == 0) {
             goto found;
         }
     }
-
-    ALOGD("1111\n");
 
     /* Loop through the configuration variants looking for a module */
     for (i=0 ; i<HAL_VARIANT_KEYS_COUNT; i++) {
@@ -198,8 +193,6 @@ int hw_get_module_by_class(const char *class_id, const char *inst,
             goto found;
         }
     }
-
-    ALOGD("2222\n");
 
     /* Nothing found, try the default */
     if (hw_module_exists(path, sizeof(path), name, "default") == 0) {

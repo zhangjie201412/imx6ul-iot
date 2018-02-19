@@ -94,7 +94,7 @@ static ssize_t get_cpu_usages(thermal_module_t *module, cpu_usage_t *list) {
     FILE *cpu_file;
     FILE *file = fopen(CPU_USAGE_FILE, "r");
 
-    ALOGD("%s: E\n", __func__);
+    ALOGD("%s: E", __func__);
     if (file == NULL) {
         ALOGE("%s: failed to open: %s", __func__, strerror(errno));
         return -errno;
@@ -155,7 +155,7 @@ static ssize_t get_cpu_usages(thermal_module_t *module, cpu_usage_t *list) {
     }
 
     fclose(file);
-    ALOGD("%s: X\n", __func__);
+    ALOGD("%s: X", __func__);
     return size;
 }
 
